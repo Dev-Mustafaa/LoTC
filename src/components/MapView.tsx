@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-const dorm: [number, number] = [40.9833, 29.2333]; // Mahmut Ökten Celaleddin Yurdu
+const dorm: [number, number] = [40.98409776701841, 29.23099463559646]; // Mahmut Ökten Celaleddin Yurdu
 const uni: [number, number] = [41.088305064846935, 29.08872394722807]; // Medipol Kavacık Kampüsü - Gerçek Koordinat
 
 // Yurtlar Verisi - KYK ve Özel
@@ -48,11 +48,39 @@ export interface Dorm {
 
 const dorms: Dorm[] = [
   {
+    id: 'ibb-erkek-yurdu',
+    name: 'Ümraniye İBB Erkek Öğrenci Yurdu',
+    type: 'ozel',
+    gender: 'erkek',
+    coords: [41.001167077823496, 29.146276655443046],
+    emoji: '🏢',
+    color: '#2563EB',
+    priceRange: '2.850 ₺',
+    mealIncluded: true,
+    capacity: 328,
+    phone: '0216 311 11 11',
+    rating: 4.1,
+    reviewCount: 203,
+    distanceToUni: '8.2 km',
+    transport: { type: 'Otobüs + Metro', transfers: 2, duration: '45-55 dk', details: 'M5 Samandıra → Üsküdar → Kavacık otobüsü' },
+    facilities: ['Kahvaltı', 'Akşam Yemeği', 'Çamaşırhane', 'Asansör', 'Çalışma Salonu', 'Spor Salonu', 'Mescit'],
+    reviews: [
+      { author: 'Yusuf A.', rating: 4, comment: 'Yeni yapılmış tesisler çok modern. İBB yurdu olması avantajlı.', date: '2024-03-20', roomType: '2 Kişilik', pricePaid: '2.850 ₺' },
+      { author: 'Emir B.', rating: 5, comment: 'Odalar ferah ve temiz. Çalışma salonları gece 2\'ye kadar açık.', date: '2024-03-05', roomType: '2 Kişilik', pricePaid: '2.850 ₺' },
+      { author: 'Oğuzhan K.', rating: 4, comment: 'Yemekler iyi ama çeşit az. Ulaşım biraz uzak ama otobüs sık.', date: '2024-02-28', roomType: '3 Kişilik', pricePaid: '2.850 ₺' },
+    ],
+    exchangeRequests: [
+      { id: '1', name: 'Can Yılmaz', currentDorm: 'Ümraniye İBB Erkek', targetSchool: 'Mahmut Ökten Celaleddin', date: '2024-04-15' },
+      { id: '2', name: 'Deniz Kaya', currentDorm: 'Ümraniye İBB Erkek', targetSchool: 'Haydar Aliyev Erkek Yurdu', date: '2024-04-12' },
+      { id: '3', name: 'Baran Demir', currentDorm: 'Ümraniye İBB Erkek', targetSchool: 'İTÜ Ayazağa', date: '2024-04-10' },
+    ]
+  },
+  {
     id: 'mahmut-celaleddin',
     name: 'Mahmut Ökten Celaleddin Erkek Öğrenci Yurdu',
     type: 'kyk',
     gender: 'erkek',
-    coords: [41.003518871394256, 29.229859337204942],
+    coords: [40.98409776701841, 29.23099463559646],
     emoji: '🏛️',
     color: '#DC2626',
     priceRange: '1.200 ₺',
@@ -342,6 +370,8 @@ export type POI = {
   studentRating?: number;
   totalVotes?: number;
   priceHistory?: PriceHistory[];
+  ticketLink?: string;
+  priceInfo?: string;
 };
 
 const pois: POI[] = [
@@ -625,17 +655,18 @@ const pois: POI[] = [
     address: 'Samandıra Mah. Okul Sok. No:21'
   },
   
-  // YEMEK & KAFE (5)
+  // YEMEK & KAFE - YENİ KOORDİNATLAR (12)
   { 
-    id: 'kent-lokanta', 
-    coords: [40.9825, 29.2370], 
-    emoji: '🍽️', 
-    label: 'Kent Lokantası', 
+    id: 'lord-doner-burger', 
+    coords: [41.01077057718313, 29.221985434102542], 
+    emoji: '🥙', 
+    label: 'Lord Döner Burger', 
     color: '#EA580C', 
     category: 'yemek',
-    address: 'Celalleddin Mah. Yemek Sok. No:6',
-    hours: '07:00 - 22:00',
-    description: 'Öğrenci menüsü: 45₺',
+    address: 'Sarıgazi Mah. Eski Edirne Asf. No:45',
+    phone: '0216 529 11 11',
+    hours: '10:00 - 02:00',
+    description: 'Döner: 85₺, Burger: 95₺, Menü: 110₺',
     studentRating: 4.2,
     totalVotes: 178,
     metrics: [
@@ -656,24 +687,25 @@ const pois: POI[] = [
     ]
   },
   { 
-    id: 'cay-evi', 
-    coords: [40.9832, 29.2318], 
-    emoji: '🍵', 
-    label: 'Öğrenci Çay Evi', 
+    id: 'icli-pide-kebab', 
+    coords: [41.00805032149013, 29.21559104745392], 
+    emoji: '🍕', 
+    label: 'İçli Pide Kebap Salonu', 
     color: '#EA580C', 
     category: 'yemek',
-    address: 'Celalleddin Mah. Çaycı Sok. No:11',
-    hours: '08:00 - 23:00',
-    description: 'Kahvaltı tabağı: 35₺, Sınırsız çay'
+    address: 'Sarıgazi Mah. Fatih Bulvarı No:123',
+    phone: '0216 529 22 22',
+    hours: '11:00 - 23:00',
+    description: 'Pide: 70₺, Kebap: 120₺, Lahmacun: 45₺'
   },
   { 
-    id: 'donerci', 
-    coords: [40.9818, 29.2328], 
-    emoji: '🥙', 
-    label: 'Samandıra Dönercisi', 
+    id: 'sushi-co', 
+    coords: [41.00173622638658, 29.227088882853717], 
+    emoji: '🍣', 
+    label: 'Sushi Co', 
     color: '#EA580C', 
     category: 'yemek',
-    address: 'Celalleddin Mah. Döner Sok. No:7',
+    address: 'Samandıra Mah. Aydınlı Yolu No:88',
     hours: '10:00 - 02:00',
     description: 'Et dürüm: 40₺, Tavuk dürüm: 30₺',
     studentRating: 4.4,
@@ -696,27 +728,125 @@ const pois: POI[] = [
     ]
   },
   { 
-    id: 'lahmacun', 
-    coords: [40.9840, 29.2335], 
-    emoji: '🍕', 
-    label: 'Gaziantep Lahmacun', 
+    id: 'merkez-tas-firin', 
+    coords: [40.99765524132834, 29.24931903187522], 
+    emoji: '🥖', 
+    label: 'Merkez Taş Fırın', 
     color: '#EA580C', 
     category: 'yemek',
-    address: 'Celalleddin Mah. Fırın Sok. No:14',
-    hours: '10:00 - 22:00'
+    address: 'Celalleddin Mah. Samandıra Cad. No:34',
+    phone: '0216 529 33 33',
+    hours: '06:00 - 21:00',
+    description: 'Ekmek: 15₺, Poğaça: 20₺, Pizza: 180₺'
+  },
+  {
+    id: 'gold-pilav', 
+    coords: [41.00912022371345, 29.224342300735234], 
+    emoji: '🍚', 
+    label: 'Gold Pilav', 
+    color: '#EA580C', 
+    category: 'yemek',
+    address: 'Sarıgazi Mah. Üniversite Yolu No:12',
+    phone: '0216 529 44 44',
+    hours: '10:00 - 22:00',
+    description: 'Tavuklu Pilav: 60₺, Nohutlu: 55₺, Menü: 75₺'
+  },
+  {
+    id: 'maydanoz-doner', 
+    coords: [41.013006205763595, 29.232238724325878], 
+    emoji: '🥙', 
+    label: 'Maydanoz Döner', 
+    color: '#EA580C', 
+    category: 'yemek',
+    address: 'Sarıgazi Mah. İstiklal Cad. No:67',
+    phone: '0216 529 55 55',
+    hours: '10:00 - 24:00',
+    description: 'Et Dürüm: 75₺, Tavuk Dürüm: 55₺, İskender: 130₺'
   },
   { 
-    id: 'burger-king', 
-    coords: [40.9788, 29.2390], 
-    emoji: '🍔', 
-    label: 'Burger King', 
-    color: '#DC2626', 
+    id: 'kent-lokanta', 
+    coords: [40.9825, 29.2370], 
+    emoji: '🍽️', 
+    label: 'Kent Lokantası (Yurdun Yanı)', 
+    color: '#EA580C', 
     category: 'yemek',
-    address: 'Yenidoğan Mah. AVM İçi No:45',
-    hours: '10:00 - 23:00'
+    address: 'Celalleddin Mah. Yemek Sok. No:6',
+    hours: '07:00 - 22:00',
+    description: 'Öğrenci menüsü: 45₺'
+  },
+  {
+    id: 'yakindaki-ev-yemegi',
+    coords: [40.9835, 29.2335],
+    emoji: '🍲',
+    label: 'Ev Yemekleri Sancaktepe',
+    color: '#EA580C',
+    category: 'yemek',
+    address: 'Celalleddin Mah. Yeni Sok. No:8',
+    phone: '0216 529 66 66',
+    hours: '08:00 - 20:00',
+    description: 'Ev yemekleri: 50₺, Çorba: 20₺'
+  },
+  {
+    id: 'yakindaki-bufe',
+    coords: [40.9845, 29.2315],
+    emoji: '🥪',
+    label: 'Öğrenci Büfesi',
+    color: '#EA580C',
+    category: 'yemek',
+    address: 'Celalleddin Mah. Okul Cad. No:15',
+    hours: '07:00 - 23:00',
+    description: 'Tost: 25₺, Sandviç: 30₺, Kahvaltı: 40₺'
   },
   
-  // KAFE & SOSYAL (4)
+  // KAFE, SPOR & GÜZELLİK - YENİ KOORDİNATLAR
+  { 
+    id: 'fit-station-gym', 
+    coords: [41.00898702098999, 29.21215433052348], 
+    emoji: '💪', 
+    label: 'Fit Station Gym', 
+    color: '#7C3AED', 
+    category: 'spor',
+    address: 'Sarıgazi Mah. Spor Cad. No:22',
+    phone: '0216 529 77 77',
+    hours: '06:00 - 23:00',
+    description: 'Aylık: 400₺, Günlük: 50₺, Öğrenci: 350₺'
+  },
+  { 
+    id: 'salon-levent', 
+    coords: [41.00781751322913, 29.234427382477996], 
+    emoji: '💈', 
+    label: 'Salon Levent', 
+    color: '#7C3AED', 
+    category: 'guzellik',
+    address: 'Sarıgazi Mah. Berberler Sok. No:3',
+    phone: '0216 529 88 88',
+    hours: '09:00 - 21:00',
+    description: 'Saç kesim: 80₺, Sakal: 40₺, Paket: 100₺'
+  },
+  { 
+    id: 'serhat-sahin-berber', 
+    coords: [40.99887870801464, 29.226273466813744], 
+    emoji: '💈', 
+    label: 'Serhat Şahin Berber', 
+    color: '#7C3AED', 
+    category: 'guzellik',
+    address: 'Samandıra Mah. Cumhuriyet Cad. No:45',
+    phone: '0216 529 99 00',
+    hours: '09:00 - 20:00',
+    description: 'Saç kesim: 60₺, Öğrenci indirimli: 50₺'
+  },
+  { 
+    id: 'salon-ahmet', 
+    coords: [41.00878904943672, 29.23210995381552], 
+    emoji: '💈', 
+    label: 'Salon Ahmet', 
+    color: '#7C3AED', 
+    category: 'guzellik',
+    address: 'Sarıgazi Mah. Kuaförler Sok. No:7',
+    phone: '0216 529 12 34',
+    hours: '08:00 - 22:00',
+    description: 'Erkek saç: 70₺, Bayan kesim: 150₺'
+  },
   { 
     id: 'starbucks', 
     coords: [40.9792, 29.2385], 
@@ -858,6 +988,144 @@ const pois: POI[] = [
     category: 'hizmet',
     address: 'Celalleddin Mah. Hizmet Sok. No:19',
     hours: '08:00 - 20:00'
+  },
+  
+  // AKTİVİTE & ETKİNLİK - SİNEMA & TİYATRO (6)
+  { 
+    id: 'sari-gazi-kultur', 
+    coords: [41.01326401924513, 29.204901432436966], 
+    emoji: '🎭', 
+    label: 'Sarıgazi Kültür Merkezi', 
+    color: '#DC2626', 
+    category: 'eglence',
+    address: 'Sarıgazi Mah. Kültür Cad. No:1',
+    phone: '0216 529 20 00',
+    hours: '09:00 - 22:00',
+    description: 'Tiyatro, konser, sergi alanları. Ücretsiz etkinlikler.',
+    studentRating: 4.7,
+    totalVotes: 234,
+    ticketLink: 'https://sancaktepe.bel.tr/etkinlikler',
+    priceInfo: 'Ücretsiz - 50₺ arası',
+    metrics: [
+      { label: 'Program Çeşitliliği', value: 88, icon: '🎭', color: '#8B5CF6' },
+      { label: 'Fiyat Uygunluğu', value: 95, icon: '💰', color: '#10B981' },
+      { label: 'Mekan Kalitesi', value: 82, icon: '🏛️', color: '#3B82F6' },
+      { label: 'Ulaşım', value: 75, icon: '🚌', color: '#F59E0B' }
+    ],
+    suggestions: [
+      { id: '50', author: 'Merve K.', avatar: 'M', content: 'Tiyatro oyunları çok kaliteli, hemşehri tiyatrosu özellikle tavsiye. Ücretsiz biletleri 1 hafta önceden almak lazım.', rating: 5, date: '1 hafta önce', likes: 45, tags: ['Tiyatro', 'Ücretsiz'] },
+      { id: '51', author: 'Can B.', avatar: 'C', content: 'Konserler harika ama yer bulmak zor. Öğrenci indirimli etkinlikler var, takip edin.', rating: 4, date: '2 hafta önce', likes: 28, tags: ['Konser', 'İndirimli'] }
+    ]
+  },
+  { 
+    id: 'ders-sahane-tiyatro', 
+    coords: [41.00225318458415, 29.1805255161354], 
+    emoji: '🎭', 
+    label: 'Ders Şahane Tiyatro Salonu', 
+    color: '#DC2626', 
+    category: 'eglence',
+    address: 'Üniversite Mah. Akademi Cad. No:12',
+    phone: '0216 529 21 11',
+    hours: 'Haftasonu 14:00-22:00',
+    description: 'Öğrenci tiyatrosu, skeç gösterileri',
+    studentRating: 4.5,
+    totalVotes: 156,
+    ticketLink: 'https://biletinial.com/tr-tr/tiyatro/drakula-tiyatro',
+    priceInfo: 'Ücretsiz - 100₺ arası',
+    suggestions: [
+      { id: '52', author: 'Ali R.', avatar: 'A', content: 'Drakula oyununu kaçırmayın! Öğrenciler çok yetenekli, profesyonel seviyede sahne.', rating: 5, date: '3 gün önce', likes: 32, tags: ['Drakula', 'Öğrenci'] },
+      { id: '53', author: 'Ece Y.', avatar: 'E', content: 'Biletler ucuz, atmosfer samimi. Arkadaşlarla gitmek için ideal.', rating: 4, date: '1 hafta önce', likes: 19, tags: ['Ucuz', 'Arkadaş'] }
+    ]
+  },
+  { 
+    id: 'kultur-merkezi-tiyatro', 
+    coords: [40.981003551007426, 29.240435338055104], 
+    emoji: '🎭', 
+    label: 'Kültür Merkezi Tiyatro Salonu', 
+    color: '#DC2626', 
+    category: 'eglence',
+    address: 'Celalleddin Mah. Tiyatro Sok. No:5',
+    phone: '0216 529 22 22',
+    hours: 'Perşembe-Pazar 20:00',
+    description: 'Profesyonel tiyatro oyunları, komedi şovları',
+    ticketLink: 'https://biletinial.com/tr-tr',
+    priceInfo: '80₺ - 250₺',
+    studentRating: 4.3,
+    totalVotes: 189,
+    suggestions: [
+      { id: '54', author: 'Burak T.', avatar: 'B', content: 'Yakınlarda en iyi tiyatro salonu. Ses sistemi mükemmel, rahat koltuklar.', rating: 5, date: '5 gün önce', likes: 26, tags: ['Ses', 'Rahat'] }
+    ]
+  },
+  { 
+    id: 'cinema-palladium', 
+    coords: [40.97517657627613, 29.24179474140301], 
+    emoji: '🎬', 
+    label: 'Cinema Palladium', 
+    color: '#DC2626', 
+    category: 'eglence',
+    address: 'Palladium AVM, Yenidoğan Mah.',
+    phone: '0216 529 23 33',
+    hours: '10:00 - 23:30',
+    description: 'Modern sinema salonları, IMAX',
+    ticketLink: 'https://www.cinemapink.com.tr',
+    priceInfo: '100₺ - 180₺ (Öğrenci: 80₺)',
+    studentRating: 4.6,
+    totalVotes: 412,
+    metrics: [
+      { label: 'Görüntü Kalitesi', value: 92, icon: '🎥', color: '#8B5CF6' },
+      { label: 'Ses Sistemi', value: 90, icon: '🔊', color: '#10B981' },
+      { label: 'Fiyat', value: 60, icon: '💰', color: '#EF4444' },
+      { label: 'Konfor', value: 85, icon: '🛋️', color: '#3B82F6' }
+    ],
+    suggestions: [
+      { id: '55', author: 'Deniz A.', avatar: 'D', content: 'IMAX deneyimi muhteşem! Öğrenci indirimi için kimlik göstermeniz yeterli. Perşembe günleri 2 bilet 1 fiyat!', rating: 5, date: '2 gün önce', likes: 38, tags: ['IMAX', 'İndirim'] },
+      { id: '56', author: 'Seda M.', avatar: 'S', content: 'Popcorn fiyatları uçuk ama film keyfi güzel. Haftasonu rezervasyon şart.', rating: 4, date: '1 hafta önce', likes: 21, tags: ['Kalabalık', 'Rezervasyon'] }
+    ]
+  },
+  { 
+    id: 'cineatlas', 
+    coords: [40.9738805310439, 29.253467715412032], 
+    emoji: '🎬', 
+    label: 'Cineatlas', 
+    color: '#DC2626', 
+    category: 'eglence',
+    address: 'Atlas AVM, Samandıra Mah.',
+    phone: '0216 529 24 44',
+    hours: '10:00 - 23:00',
+    description: '10 sinema salonu, 3D filmler',
+    ticketLink: 'https://www.cinemapink.com.tr',
+    priceInfo: '90₺ - 160₺ (Öğrenci: 70₺)',
+    studentRating: 4.4,
+    totalVotes: 298,
+    suggestions: [
+      { id: '57', author: 'Ozan K.', avatar: 'O', content: 'Daha uygun fiyatlı sinema burası. Salonlar temiz, personel ilgili.', rating: 4, date: '3 gün önce', likes: 15, tags: ['Uygun', 'Temiz'] }
+    ]
+  },
+  { 
+    id: 'paribu-cinema', 
+    coords: [41.01793912765717, 29.18007374155488], 
+    emoji: '🎬', 
+    label: 'Paribu Cineverse', 
+    color: '#DC2626', 
+    category: 'eglence',
+    address: 'Vadistanbul AVM, Ayazağa Mah.',
+    phone: '0212 329 25 55',
+    hours: '10:00 - 00:00',
+    description: 'Lüks sinema deneyimi, VİP salonlar',
+    ticketLink: 'https://paribucineverse.com',
+    priceInfo: '150₺ - 300₺ (Öğrenci: 120₺)',
+    studentRating: 4.8,
+    totalVotes: 567,
+    metrics: [
+      { label: 'Lüks', value: 95, icon: '👑', color: '#8B5CF6' },
+      { label: 'Hizmet', value: 90, icon: '🤵', color: '#10B981' },
+      { label: 'Fiyat', value: 40, icon: '💰', color: '#EF4444' },
+      { label: 'Konfor', value: 96, icon: '🛋️', color: '#3B82F6' }
+    ],
+    suggestions: [
+      { id: '58', author: 'Kerem B.', avatar: 'K', content: 'VİP salonları gerçekten lüks! Servis masaya kadar geliyor. Özel günler için ideal.', rating: 5, date: '1 hafta önce', likes: 42, tags: ['VIP', 'Lüks'] },
+      { id: '59', author: 'Zeynep T.', avatar: 'Z', content: 'Fiyatlar yüksek ama deneyim eşsiz. Öğrenci bütçesi için her hafta değil ama arada sırada gidilir.', rating: 4, date: '2 hafta önce', likes: 31, tags: ['Özel Gün', 'Pahalı'] }
+    ]
   },
 ];
 
@@ -1178,7 +1446,6 @@ export function MapView() {
                     setActiveSubFilters([]);
                   }
                   setExpandedMain(null);
-                  deactivateDormsCategory();
                 } else if (mainCat.id === 'isletmeler') {
                   // İşletmeler - expand/collapse ve toggle
                   const isSelected = activeMainCategories.includes('isletmeler');
@@ -1190,7 +1457,6 @@ export function MapView() {
                     setActiveMainCategories(prev => [...prev, 'isletmeler']);
                     setExpandedMain('isletmeler');
                   }
-                  deactivateDormsCategory();
                 } else if (mainCat.id === 'yurtlar') {
                   // Yurtlar kategorisi - toggle
                   const isSelected = activeMainCategories.includes('yurtlar');
@@ -1209,7 +1475,6 @@ export function MapView() {
                   } else {
                     setActiveMainCategories(prev => [...prev, mainCat.id]);
                   }
-                  deactivateDormsCategory();
                 }
               }}
               className={`px-[10px] py-[6px] rounded-[20px] text-[11px] font-medium transition-colors whitespace-nowrap ${
